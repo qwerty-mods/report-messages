@@ -46,6 +46,7 @@ module.exports = class ReportModal extends React.PureComponent {
                 <Modal.Footer>
                     <Button
                         color={Button.Colors.BLUE}
+                        disabled={typeof(this.state.reason) != "number"}
                         onClick={async () => {                        
                                 let data = await report({
                                     channel_id: message.channel_id,

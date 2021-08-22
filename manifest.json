@@ -1,6 +1,6 @@
 {
     "name": "Report Messages",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Report a message directly to discord similar to how the mobile app does.",
     "author": "12944qwerty",
     "license": "MIT"
