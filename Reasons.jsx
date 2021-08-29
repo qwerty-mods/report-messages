@@ -1,4 +1,4 @@
-const { React, getModuleByDisplayName, getModule } = require("powercord/webpack");
+const { React, getModuleByDisplayName, getModule, i18n: {Messages} } = require("powercord/webpack");
 const { SelectInput, RadioGroup } = require("powercord/components/settings");
 const { Modal } = require("powercord/components/modal");
 const { close: closeModal } = require("powercord/modal");
@@ -16,7 +16,7 @@ module.exports = class ReportModal extends React.PureComponent {
             reason: 'nsfw'
         }
     }
-    
+
     render() {
         const { message } = this.props;
 
@@ -30,7 +30,7 @@ module.exports = class ReportModal extends React.PureComponent {
         return (
             <Modal className="rm-modal">
                 <Modal.Header>
-                    <FormTitle tag="h4">Report Message Posted By {message.author.username}</FormTitle>
+                    <FormTitle tag="h4">{Messages.REPORT_MESSAGE.format({ name: message.author.username })}</FormTitle>
                 </Modal.Header>
 
                 <Modal.Content>
@@ -47,7 +47,7 @@ module.exports = class ReportModal extends React.PureComponent {
                     <Button
                         color={Button.Colors.BLUE}
                         disabled={typeof(this.state.reason) != "number"}
-                        onClick={async () => {                        
+                        onClick={async () => {
                                 let data = await report({
                                     channel_id: message.channel_id,
                                     message_id: message.id,
