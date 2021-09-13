@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
 const { React, getModule } = require('powercord/webpack');
-const { inject, uninject } = require('powercord/injector');
+const { inject, uninject, i18n: {Messages} } = require('powercord/injector');
 const { findInReactTree } = require('powercord/util');
 const { open } = require("powercord/modal");
 
@@ -9,15 +9,17 @@ const Reasons = require('./Reasons');
 module.exports = class ReportMessage extends Plugin {
     async startPlugin() {
         const Menu = await getModule(['MenuItem']);
-		const MessageContextMenu = await getModule(
-			(m) => m?.default?.displayName === "MessageContextMenu"
-		);
-		inject("rm-contextmenu", MessageContextMenu, "default", (args, res) => {
-			if (!args[0]?.message || !res?.props?.children) return res;
+        const MessageContextMenu = await getModule(
+          (m) => m?.default?.displayName === "MessageContextMenu"
+        );
+        const { MenuItemColor } = await getModule([ "MenuItemColor" ]);
+        inject("rm-contextmenu", MessageContextMenu, "default", (args, res) => {
+            if (!args[0]?.message || !res?.props?.children) return res;
 
             const rmButton = React.createElement(Menu.MenuItem, {
                 id: "report-message-btn",
-                label: "Report Message",
+                label: Messages.REPORT_MESSAGE_MENU_OPTION,
+                color: MenuItemColor.DANGER,
                 action: () => open(() => React.createElement(Reasons, {message: args[0].message}))
             });
 
