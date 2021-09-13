@@ -1,6 +1,6 @@
 const { Plugin } = require('powercord/entities');
-const { React, getModule } = require('powercord/webpack');
-const { inject, uninject, i18n: {Messages} } = require('powercord/injector');
+const { React, getModule, i18n: {Messages} } = require('powercord/webpack');
+const { inject, uninject } = require('powercord/injector');
 const { findInReactTree } = require('powercord/util');
 const { open } = require("powercord/modal");
 
