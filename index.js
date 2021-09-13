@@ -23,17 +23,16 @@ module.exports = class ReportMessage extends Plugin {
                 action: () => open(() => React.createElement(Reasons, {message: args[0].message}))
             });
 
-            const devmodeItem = findInReactTree(res.props.children, child => child.props && child.props.id === 'devmode-copy-id');
-            const developerGroup = res.props.children.find(child => child.props && child.props.children === devmodeItem);
-            if (developerGroup) {
-                if (!Array.isArray(developerGroup.props.children)) {
-                    developerGroup.props.children = [developerGroup.props.children];
+            const groupPointer = findInReactTree(res.props.children[2].props.children, child => child.props && child.props.id === 'copy-link');
+            const mainGroup = res.props.children.find(child => child.props.children && child.props.children.includes(speakMessage));
+            if (mainGroup) {
+                if (!Array.isArray(mainGroup.props.children)) {
+                    mainGroup.props.children = [mainGroup.props.children];
                 }
 
-                developerGroup.props.children.push(rmButton);
-            } else {
-                res.props.children.push([React.createElement(Menu.MenuSeparator), React.createElement(Menu.MenuGroup, {}, rmButton)]);
+                mainGroup.props.children.push(rmButton);
             }
+
             return res;
         });
 
