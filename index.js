@@ -30,7 +30,7 @@ module.exports = class ReportMessage extends Plugin {
                     mainGroup.props.children = [mainGroup.props.children];
                 }
 
-                mainGroup.props.children.push(rmButton);
+                mainGroup.props.children.splice(12, 0, rmButton);
             }
 
             return res;
