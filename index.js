@@ -24,7 +24,7 @@ module.exports = class ReportMessage extends Plugin {
             });
 
             const groupPointer = findInReactTree(res.props.children[2].props.children, child => child.props && child.props.id === 'copy-link');
-            const mainGroup = res.props.children.find(child => child.props.children && child.props.children.includes(speakMessage));
+            const mainGroup = res.props.children.find(child => child.props.children && child.props.children.includes(groupPointer));
             if (mainGroup) {
                 if (!Array.isArray(mainGroup.props.children)) {
                     mainGroup.props.children = [mainGroup.props.children];
