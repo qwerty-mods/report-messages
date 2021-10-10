@@ -39,7 +39,7 @@ module.exports = class ReportModal extends React.PureComponent {
                         value={this.state.reason}
                         options={reasons}
                         required={true}
-                        note={`Reports are sent to the Discord Trust & Safety team${getChannel(message.channel_id).guild_id != null ? ' - not the Server Owner' : ''}. Creating false reports and/or spamming the report button may result in a suspension or reporting abilities. Learn more from the Discord Community Guide. Thanks for keeping things safe and sound.`}
+                        note={`Reports are sent to the Discord Trust & Safety team${getChannel(message.channel_id).guild_id != null ? ' - not the Server Owner' : ''}. Creating false reports and/or spamming the report button may result in a suspension of reporting abilities. Learn more from the Discord Community Guide. Thanks for keeping things safe and sound.`}
                     >Choose a Reason</RadioGroup>
                 </Modal.Content>
 
