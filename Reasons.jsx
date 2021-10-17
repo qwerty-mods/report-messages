@@ -74,7 +74,7 @@ module.exports = class ReportModal extends React.PureComponent {
                                         text: 'Dismiss',
                                         color: 'green',
                                         look: 'outlined',
-                                        onClick: () => powercord.api.notices.closeToast('remountNotif')
+                                        onClick: () => powercord.api.notices.closeToast('rmToast')
                                     }],
                                     timeout: 3e4
                                 });
