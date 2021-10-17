@@ -33,20 +33,20 @@ module.exports = class ReportMessage extends Plugin {
             if (this.settings.get('who-safe') === 'friends' && isFriend(author_id)) return res;
 
             const rmButton = React.createElement(Menu.MenuItem, {
-                id: 'report-message-btn',
+                id: 'report',
                 label: Messages.REPORT_MESSAGE_MENU_OPTION,
                 color: MenuItemColor.DANGER,
                 action: () => open(() => React.createElement(Reasons, { args }))
             });
 
-            const groupPointer = findInReactTree(res.props.children[2].props.children, child => child?.props.id === 'copy-link');
+            const groupPointer = findInReactTree(res.props.children[2].props.children, child => child?.props?.id === 'copy-link');
             const mainGroup = res.props.children.find(child => child.props.children?.includes(groupPointer));
             if (mainGroup) {
                 if (!Array.isArray(mainGroup.props.children)) {
                     mainGroup.props.children = [ mainGroup.props.children ];
                 }
 
-                mainGroup.props.children.splice(12, 0, rmButton);
+                mainGroup.props.children.splice(13, 0, rmButton);
             }
 
             return res;
