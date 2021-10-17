@@ -41,12 +41,15 @@ module.exports = class ReportMessage extends Plugin {
 
             const groupPointer = findInReactTree(res.props.children[2].props.children, child => child?.props?.id === 'copy-link');
             const mainGroup = res.props.children.find(child => child.props.children?.includes(groupPointer));
+
+            // console.log(res.props.children[2].props.children); // Used to figure out placement of button
+
             if (mainGroup) {
                 if (!Array.isArray(mainGroup.props.children)) {
                     mainGroup.props.children = [ mainGroup.props.children ];
                 }
 
-                mainGroup.props.children.splice(13, 0, rmButton);
+                mainGroup.props.children.splice(14, 0, rmButton);
             }
 
             return res;
