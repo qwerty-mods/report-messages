@@ -39,8 +39,8 @@ module.exports = class ReportMessage extends Plugin {
                 action: () => open(() => React.createElement(Reasons, { args }))
             });
 
-            const groupPointer = findInReactTree(res.props.children[2].props.children, child => child?.props?.id === 'copy-link');
-            const mainGroup = res.props.children.find(child => child.props.children?.includes(groupPointer));
+            const groupPointer = findInReactTree(res.props.children, child => child?.props?.children && findInReactTree(child.props.children, c => c?.props?.id === 'copy-link'));
+            const mainGroup = res.props.children.find(child => child?.props?.children && child === groupPointer);
 
             // console.log(res.props.children[2].props.children); // Used to figure out placement of button
 
