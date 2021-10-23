@@ -5,7 +5,7 @@ const { Modal } = require('powercord/components/modal');
 const { close: closeModal } = require('powercord/modal');
 
 const { report } = getModule([ 'report', 'submitReport' ], false);
-const { getChannel } = getModule([ 'getChannel' ], false);
+const { getChannel } = getModule([ 'getDMFromUserId' ], false);
 
 const FormText = AsyncComponent.from(getModuleByDisplayName('FormText'));
 
@@ -21,6 +21,9 @@ module.exports = class ReportModal extends React.PureComponent {
 
     render() {
         const { message } = this.props.args[0];
+        
+        const channel = getChannel(message.channel_id);
+        message.guild_id = channel.guild_id;
 
         const reasons = [
             { name: 'Illegal Content', desc: 'Child Pornography, solicitation of minors, terrorism, threats of school shootings or criminal activity.', value: 0 },
