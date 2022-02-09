@@ -7,16 +7,9 @@ const { open } = require('powercord/modal');
 const Reasons = require('./Reasons');
 const Settings = require('./Settings');
 
-let getCurrentUser;
-let currentUser;
-
 module.exports = class ReportMessage extends Plugin {
     async startPlugin() {
-        getCurrentUser = await getModule([ 'getCurrentUser' ]);
-        currentUser = getCurrentUser.getCurrentUser();
         let { isFriend } = await getModule(['isFriend']);
-        
-
 
         powercord.api.settings.registerSettings(this.entityID, {
             category: this.entityID,
@@ -27,8 +20,9 @@ module.exports = class ReportMessage extends Plugin {
     }
 
     async __injectContextMenu(isFriend) {
-      const MessageContextMenu = getModule((m) => m?.default?.displayName === 'MessageContextMenu');
       this.lazyPatchContextMenu('MessageContextMenu', async (MessageContextMenu) => {
+        const getCurrentUser = await getModule([ 'getCurrentUser' ]);
+        const currentUser = getCurrentUser.getCurrentUser();
         const Menu = await getModule([ 'MenuItem' ]);
         const { MenuItemColor } = await getModule([ 'MenuItemColor' ]);
         inject('rm-contextmenu', MessageContextMenu, 'default', (args, res) => {
